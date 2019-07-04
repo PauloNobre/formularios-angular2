@@ -1,70 +1,50 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
 
-  <div class="form-group" 
-    [class.has-error]="nome.invalid && nome.touched"
-    [class.has-feedback]="nome.invalid && nome.touched">
+  <div class="form-group" [ngClass]="aplicaCssErro(nome)">
 
     <div class="col-sm-12">
       <label class="control-label" for="nome">Nome</label>
       <input type="text" class="form-control" id="nome" name="nome" 
         placeholder="Nome" [ngModel]="usuario.nome" required #nome="ngModel">
-
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="nome.invalid && nome.touched"></span>
-      <span class="rs-only" *ngIf="nome.invalid && nome.touched"></span>
-      <div class="alert alert-danger" *ngIf="nome.invalid && nome.touched" role="alert">
-        Nome é obrigatório.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(nome)"
+        msgErro="Nome é obrigatório">
+      </app-campo-control-erro>
     </div>
   </div>
 
-  <div class="form-group" 
-    [class.has-error]="email.invalid && email.touched"
-    [class.has-feedback]="email.invalid && email.touched">
+  <div class="form-group" [ngClass]="aplicaCssErro(email)">
 
     <div class="col-sm-12">
       <label class="control-label" for="email">Email</label>
       <input type="email" class="form-control" id="email" name="email" 
         placeholder="nome@email.com" [ngModel]="usuario.email" required email #email="ngModel">
-  
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="email.invalid && email.touched"></span>
-      <span class="rs-only" *ngIf="email.invalid && email.touched"></span>
-      <div class="alert alert-danger" *ngIf="email.invalid && email.touched" role="alert">
-        Email inválido.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(email)"
+        msgErro="Email inválido">
+      </app-campo-control-erro>
     </div>
   </div>
 
   <div class="form-group">
-    <div class="col-md-3"
-      [class.has-error]="cep.invalid && cep.touched"
-      [class.has-feedback]="cep.invalid && cep.touched">
+    <div class="col-md-3" [ngClass]="aplicaCssErro(cep)">
       <label for="cep" class="control-label">CEP</label>
       <input type="text" class="form-control" id="cep" 
         name="cep" ngModel required #cep="ngModel">
-      
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="cep.invalid && email.touched"></span>
-      <span class="rs-only" *ngIf="cep.invalid && email.touched"></span>
-      <div class="alert alert-danger" *ngIf="cep.invalid && cep.touched" role="alert">
-        CEP inválido.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(cep)"
+        msgErro="CEP inválido">
+      </app-campo-control-erro>
     </div>
 
-    <div class="col-md-3"
-      [class.has-error]="numero.invalid && numero.touched"
-      [class.has-feedback]="numero.invalid && numero.touched">
+    <div class="col-md-3" [ngClass]="aplicaCssErro(numero)">
       <label for="numero" class="control-label">Número</label>
       <input type="text" class="form-control" id="numero" 
         name="numero" ngModel required #numero="ngModel">
-      
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="numero.invalid && email.touched"></span>
-      <span class="rs-only" *ngIf="numero.invalid && email.touched"></span>
-      <div class="alert alert-danger" *ngIf="numero.invalid && numero.touched" role="alert">
-        Número é obrigatório.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(numero)"
+        msgErro="Numero é obrigatório">
+      </app-campo-control-erro>
     </div>
 
     <div class="col-md-6">
@@ -74,68 +54,48 @@
     </div>
   </div>
 
-  <div class="form-group" 
-    [class.has-error]="rua.invalid && rua.touched"
-    [class.has-feedback]="rua.invalid && rua.touched">
+  <div class="form-group" [ngClass]="aplicaCssErro(rua)">
 
     <div class="col-sm-12">
       <label class="control-label" for="rua">Rua</label>
       <input type="text" class="form-control" id="rua" name="rua" 
         readonly ngModel required #rua="ngModel">
-
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="rua.invalid && rua.touched"></span>
-      <span class="rs-only" *ngIf="rua.invalid && rua.touched"></span>
-      <div class="alert alert-danger" *ngIf="rua.invalid && rua.touched" role="alert">
-        Rua é obrigatório.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(rua)"
+        msgErro="Rua é obrigatório">
+      </app-campo-control-erro>
     </div>
   </div>
 
   <div class="form-group">
-    <div class="col-md-5"
-      [class.has-error]="bairro.invalid && bairro.touched"
-      [class.has-feedback]="bairro.invalid && bairro.touched">
+    <div class="col-md-5" [ngClass]="aplicaCssErro(bairro)">
       <label for="bairro" class="control-label">Bairro</label>
       <input type="text" class="form-control" id="bairro" 
         name="bairro" ngModel required #bairro="ngModel">
-      
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="bairro.invalid && email.touched"></span>
-      <span class="rs-only" *ngIf="bairro.invalid && email.touched"></span>
-      <div class="alert alert-danger" *ngIf="bairro.invalid && bairro.touched" role="alert">
-        Bairro é obrigatório.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(bairro)"
+        msgErro="Bairro é obrigatório">
+      </app-campo-control-erro>
     </div>
 
-    <div class="col-md-4"
-      [class.has-error]="cidade.invalid && cidade.touched"
-      [class.has-feedback]="cidade.invalid && cidade.touched">
+    <div class="col-md-4" [ngClass]="aplicaCssErro(cidade)">
       <label for="cidade" class="control-label">Cidade</label>
       <input type="text" class="form-control" id="cidade" 
         name="cidade" ngModel required #cidade="ngModel">
-      
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="cidade.invalid && email.touched"></span>
-      <span class="rs-only" *ngIf="cidade.invalid && email.touched"></span>
-      <div class="alert alert-danger" *ngIf="cidade.invalid && cidade.touched" role="alert">
-        Cidade é obrigatório.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(cidade)"
+        msgErro="Cidade é obrigatório">
+      </app-campo-control-erro>
     </div>
 
-    <div class="col-md-3"
-      [class.has-error]="estado.invalid && estado.touched"
-      [class.has-feedback]="estado.invalid && estado.touched">
+    <div class="col-md-3" [ngClass]="aplicaCssErro(estado)">
       <label for="estado" class="control-label">Estado</label>
       <input type="text" class="form-control" id="estado" 
         name="estado" ngModel required #estado="ngModel">
-      
-      <span class="glyphicon glyphicon-remove form-control-feedback"
-        arial-hidden="true" *ngIf="estado.invalid && email.touched"></span>
-      <span class="rs-only" *ngIf="estado.invalid && email.touched"></span>
-      <div class="alert alert-danger" *ngIf="estado.invalid && estado.touched" role="alert">
-        Estado é obrigatório.
-      </div>
+      <app-campo-control-erro 
+        [mostrarErro]="verificaInvalidTouched(estado)"
+        msgErro="Estado é obrigatório">
+      </app-campo-control-erro>
     </div>
   </div>
 
