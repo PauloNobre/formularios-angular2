@@ -35,19 +35,61 @@ export class TemplateFormComponent implements OnInit {
     };
   }
 
-  consultaCEP(cep) {
-    console.log(cep);
+  consultaCEP(cep, form) {
     cep = cep.replace(/\D/g, '');
 
     if (cep != '') {
       const validaCEP = /^[0-9]{8}$/;
 
       if (validaCEP.test(cep)) {
+
+        this.resetaDadosForm(form);
+
         this.http.get(`//viacep.com.br/ws/${cep}/json`)
           .map(dados => dados.json())
-          .subscribe(
-            dados => console.log(dados));
+          .subscribe(dados => this.populaDadosForm(dados, form));
       }
     }
+  }
+
+  populaDadosForm(dados, form) {
+    /* form.setValue({
+      nome: form.value.nome,
+      email: form.value.email,
+      endereco: {
+        cep: dados.cep,
+        numero: '',
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    }); */
+
+    form.form.patchValue({
+      endereco: {
+        cep: dados.cep,
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    });
+  }
+
+  resetaDadosForm(form) {
+    form.form.patchValue({
+      endereco: {
+        cep: null,
+        numero: null,
+        complemento: null,
+        rua: null,
+        bairro: null,
+        cidade: null,
+        estado: null
+      }
+    });
   }
 }
